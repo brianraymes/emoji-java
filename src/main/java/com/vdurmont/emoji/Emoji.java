@@ -30,12 +30,11 @@ public class Emoji {
    * @param bytes               the bytes that represent the emoji
    */
   protected Emoji(
-    String description,
-    boolean supportsFitzpatrick,
-    List<String> aliases,
-    List<String> tags,
-    byte... bytes
-  ) {
+      String description,
+      boolean supportsFitzpatrick,
+      List<String> aliases,
+      List<String> tags,
+      byte... bytes) {
     this.description = description;
     this.supportsFitzpatrick = supportsFitzpatrick;
     this.aliases = Collections.unmodifiableList(aliases);
@@ -48,7 +47,7 @@ public class Emoji {
       String[] pointCodes = new String[stringLength];
       String[] pointCodesHex = new String[stringLength];
 
-      for (int offset = 0; offset < stringLength; ) {
+      for (int offset = 0; offset < stringLength;) {
         final int codePoint = getUnicode().codePointAt(offset);
 
         pointCodes[count] = String.format("&#%d;", codePoint);
@@ -65,12 +64,13 @@ public class Emoji {
 
   /**
    * Method to replace String.join, since it was only introduced in java8
+   * 
    * @param array the array to be concatenated
    * @return concatenated String
    */
-  private String stringJoin(String[] array, int count){
+  private String stringJoin(String[] array, int count) {
     String joined = "";
-    for(int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++)
       joined += array[i];
     return joined;
   }
@@ -130,14 +130,13 @@ public class Emoji {
    *
    * @return the unicode representation
    * @throws UnsupportedOperationException if the emoji doesn't support the
-   * Fitzpatrick modifiers
+   *                                       Fitzpatrick modifiers
    */
   public String getUnicode(Fitzpatrick fitzpatrick) {
     if (!this.supportsFitzpatrick()) {
       throw new UnsupportedOperationException(
-        "Cannot get the unicode with a fitzpatrick modifier, " +
-        "the emoji doesn't support fitzpatrick."
-      );
+          "Cannot get the unicode with a fitzpatrick modifier, " +
+              "the emoji doesn't support fitzpatrick.");
     } else if (fitzpatrick == null) {
       return this.getUnicode();
     }
@@ -155,7 +154,7 @@ public class Emoji {
 
   /**
    * @deprecated identical to {@link #getHtmlHexadecimal()} for
-   * backwards-compatibility. Use that instead.
+   *             backwards-compatibility. Use that instead.
    *
    * @return the HTML hexadecimal representation
    */
@@ -175,7 +174,7 @@ public class Emoji {
   @Override
   public boolean equals(Object other) {
     return !(other == null || !(other instanceof Emoji)) &&
-      ((Emoji) other).getUnicode().equals(getUnicode());
+        ((Emoji) other).getUnicode().equals(getUnicode());
   }
 
   @Override
@@ -202,13 +201,13 @@ public class Emoji {
   @Override
   public String toString() {
     return "Emoji{" +
-      "description='" + description + '\'' +
-      ", supportsFitzpatrick=" + supportsFitzpatrick +
-      ", aliases=" + aliases +
-      ", tags=" + tags +
-      ", unicode='" + unicode + '\'' +
-      ", htmlDec='" + htmlDec + '\'' +
-      ", htmlHex='" + htmlHex + '\'' +
-      '}';
+        "description='" + description + '\'' +
+        ", supportsFitzpatrick=" + supportsFitzpatrick +
+        ", aliases=" + aliases +
+        ", tags=" + tags +
+        ", unicode='" + unicode + '\'' +
+        ", htmlDec='" + htmlDec + '\'' +
+        ", htmlHex='" + htmlHex + '\'' +
+        '}';
   }
 }

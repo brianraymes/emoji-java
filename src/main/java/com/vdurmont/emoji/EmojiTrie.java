@@ -14,7 +14,7 @@ public class EmojiTrie {
       Node tree = root;
       char[] chars = emoji.getUnicode().toCharArray();
       maxDepth = Math.max(maxDepth, chars.length);
-      for (char c: chars) {
+      for (char c : chars) {
         if (!tree.hasChild(c)) {
           tree.addChild(c);
         }
@@ -25,37 +25,38 @@ public class EmojiTrie {
     this.maxDepth = maxDepth;
   }
 
-
   /**
    * Checks if sequence of chars contain an emoji.
    *
    * @param sequence Sequence of char that may contain emoji in full or
-   * partially.
+   *                 partially.
    *
    * @return
-   * &lt;li&gt;
-   *   Matches.EXACTLY if char sequence in its entirety is an emoji
-   * &lt;/li&gt;
-   * &lt;li&gt;
-   *   Matches.POSSIBLY if char sequence matches prefix of an emoji
-   * &lt;/li&gt;
-   * &lt;li&gt;
-   *   Matches.IMPOSSIBLE if char sequence matches no emoji or prefix of an
-   *   emoji
-   * &lt;/li&gt;
+   *         &lt;li&gt;
+   *         Matches.EXACTLY if char sequence in its entirety is an emoji
+   *         &lt;/li&gt;
+   *         &lt;li&gt;
+   *         Matches.POSSIBLY if char sequence matches prefix of an emoji
+   *         &lt;/li&gt;
+   *         &lt;li&gt;
+   *         Matches.IMPOSSIBLE if char sequence matches no emoji or prefix of an
+   *         emoji
+   *         &lt;/li&gt;
    */
   public Matches isEmoji(char[] sequence) {
     return isEmoji(sequence, 0, sequence.length);
   }
 
   /**
-   * Checks if the sequence of chars within the given bound indices contain an emoji.
+   * Checks if the sequence of chars within the given bound indices contain an
+   * emoji.
+   * 
    * @see #isEmoji(char[])
    */
   public Matches isEmoji(char[] sequence, int start, int end) {
     if (start < 0 || start > end || end > sequence.length) {
       throw new ArrayIndexOutOfBoundsException(
-              "start " + start + ", end " + end + ", length " + sequence.length);
+          "start " + start + ", end " + end + ", length " + sequence.length);
     }
 
     if (sequence == null) {
@@ -73,9 +74,9 @@ public class EmojiTrie {
     return tree.isEndOfEmoji() ? Matches.EXACTLY : Matches.POSSIBLY;
   }
 
-
   /**
    * Finds Emoji instance from emoji unicode
+   * 
    * @param unicode unicode of emoji to get
    * @return Emoji instance if unicode matches and emoji, null otherwise.
    */
@@ -86,7 +87,7 @@ public class EmojiTrie {
   Emoji getEmoji(char[] sequence, int start, int end) {
     if (start < 0 || start > end || end > sequence.length) {
       throw new ArrayIndexOutOfBoundsException(
-              "start " + start + ", end " + end + ", length " + sequence.length);
+          "start " + start + ", end " + end + ", length " + sequence.length);
     }
 
     Node tree = root;

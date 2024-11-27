@@ -17,15 +17,17 @@ import static org.junit.Assert.assertTrue;
 /**
  * Test that checks emoji json.
  * <p>
- *     Currently contains checks for:
- *     <ul>
- *         <li>Unicode emoji presents in json</li>
- *         <li>Right fitzpatric flag for emoji</li>
- *     </ul>
+ * Currently contains checks for:
+ * <ul>
+ * <li>Unicode emoji presents in json</li>
+ * <li>Right fitzpatric flag for emoji</li>
+ * </ul>
  *
  * <p>
- *     The test data is taken from: <a href="http://unicode.org/Public/emoji/4.0/emoji-test.txt">Unicode test data</a>
- *     related to unicode 9.0
+ * The test data is taken from:
+ * <a href="http://unicode.org/Public/emoji/4.0/emoji-test.txt">Unicode test
+ * data</a>
+ * related to unicode 9.0
  */
 @RunWith(Parameterized.class)
 public class EmojiJsonTest {
@@ -35,7 +37,7 @@ public class EmojiJsonTest {
         return EmojiTestDataReader.getEmojiList(is);
     }
 
-    private static final int[] FITZPATRIC_CODEPOINTS = new int[]{
+    private static final int[] FITZPATRIC_CODEPOINTS = new int[] {
             EmojiTestDataReader.convertFromCodepoint("1F3FB"),
             EmojiTestDataReader.convertFromCodepoint("1F3FC"),
             EmojiTestDataReader.convertFromCodepoint("1F3FD"),
@@ -84,7 +86,7 @@ public class EmojiJsonTest {
             final List<String> result = new LinkedList<String>();
 
             String line = reader.readLine();
-            String [] lineSplit;
+            String[] lineSplit;
             while (line != null) {
                 if (!line.startsWith("#") && !line.startsWith(" ") && !line.startsWith("\n") &&
                         line.length() != 0) {
@@ -114,10 +116,13 @@ public class EmojiJsonTest {
 
     @Test
     public void checkInverseParse() {
-        assertEquals(emoji, EmojiParser.parseToUnicode(EmojiParser.parseToHtmlDecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
+        assertEquals(emoji, EmojiParser
+                .parseToUnicode(EmojiParser.parseToHtmlDecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
 
-        assertEquals(emoji, EmojiParser.parseToUnicode(EmojiParser.parseToHtmlHexadecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
+        assertEquals(emoji, EmojiParser
+                .parseToUnicode(EmojiParser.parseToHtmlHexadecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
 
-        assertEquals(emoji, EmojiParser.parseToUnicode(EmojiParser.parseToAliases(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
+        assertEquals(emoji,
+                EmojiParser.parseToUnicode(EmojiParser.parseToAliases(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
     }
 }

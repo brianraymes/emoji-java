@@ -37,11 +37,11 @@ public class EmojiLoaderTest {
   public void buildEmojiFromJSON() throws UnsupportedEncodingException {
     // GIVEN
     JSONObject json = new JSONObject("{"
-      + "\"emoji\": \"😄\","
-      + "\"description\": \"smiling face with open mouth and smiling eyes\","
-      + "\"aliases\": [\"smile\"],"
-      + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
-      + "}");
+        + "\"emoji\": \"😄\","
+        + "\"description\": \"smiling face with open mouth and smiling eyes\","
+        + "\"aliases\": [\"smile\"],"
+        + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
+        + "}");
 
     // WHEN
     Emoji emoji = EmojiLoader.buildEmojiFromJSON(json);
@@ -50,9 +50,8 @@ public class EmojiLoaderTest {
     assertNotNull(emoji);
     assertEquals("😄", emoji.getUnicode());
     assertEquals(
-      "smiling face with open mouth and smiling eyes",
-      emoji.getDescription()
-    );
+        "smiling face with open mouth and smiling eyes",
+        emoji.getDescription());
     assertEquals(1, emoji.getAliases().size());
     assertEquals("smile", emoji.getAliases().get(0));
     assertEquals(3, emoji.getTags().size());
@@ -63,13 +62,13 @@ public class EmojiLoaderTest {
 
   @Test
   public void buildEmojiFromJSON_without_description_sets_a_null_description()
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
     // GIVEN
     JSONObject json = new JSONObject("{"
-      + "\"emoji\": \"😄\","
-      + "\"aliases\": [\"smile\"],"
-      + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
-      + "}");
+        + "\"emoji\": \"😄\","
+        + "\"aliases\": [\"smile\"],"
+        + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
+        + "}");
 
     // WHEN
     Emoji emoji = EmojiLoader.buildEmojiFromJSON(json);
@@ -81,12 +80,12 @@ public class EmojiLoaderTest {
 
   @Test
   public void buildEmojiFromJSON_without_unicode_returns_null()
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
     // GIVEN
     JSONObject json = new JSONObject("{"
-      + "\"aliases\": [\"smile\"],"
-      + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
-      + "}");
+        + "\"aliases\": [\"smile\"],"
+        + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
+        + "}");
 
     // WHEN
     Emoji emoji = EmojiLoader.buildEmojiFromJSON(json);
@@ -97,14 +96,14 @@ public class EmojiLoaderTest {
 
   @Test
   public void buildEmojiFromJSON_computes_the_html_codes()
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
     // GIVEN
     JSONObject json = new JSONObject("{"
-      + "\"emoji\": \"😄\","
-      + "\"description\": \"smiling face with open mouth and smiling eyes\","
-      + "\"aliases\": [\"smile\"],"
-      + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
-      + "}");
+        + "\"emoji\": \"😄\","
+        + "\"description\": \"smiling face with open mouth and smiling eyes\","
+        + "\"aliases\": [\"smile\"],"
+        + "\"tags\": [\"happy\", \"joy\", \"pleased\"]"
+        + "}");
 
     // WHEN
     Emoji emoji = EmojiLoader.buildEmojiFromJSON(json);
@@ -118,15 +117,15 @@ public class EmojiLoaderTest {
 
   @Test
   public void buildEmojiFromJSON_with_support_for_fitzpatrick_true()
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
     // GIVEN
     JSONObject json = new JSONObject("{"
-      + "\"emoji\": \"\uD83D\uDC66\","
-      + "\"description\": \"boy\","
-      + "\"supports_fitzpatrick\": true,"
-      + "\"aliases\": [\"boy\"],"
-      + "\"tags\": [\"child\"]"
-      + "}");
+        + "\"emoji\": \"\uD83D\uDC66\","
+        + "\"description\": \"boy\","
+        + "\"supports_fitzpatrick\": true,"
+        + "\"aliases\": [\"boy\"],"
+        + "\"tags\": [\"child\"]"
+        + "}");
 
     // WHEN
     Emoji emoji = EmojiLoader.buildEmojiFromJSON(json);
@@ -138,15 +137,15 @@ public class EmojiLoaderTest {
 
   @Test
   public void buildEmojiFromJSON_with_support_for_fitzpatrick_false()
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
     // GIVEN
     JSONObject json = new JSONObject("{"
-      + "\"emoji\": \"\uD83D\uDE15\","
-      + "\"description\": \"confused face\","
-      + "\"supports_fitzpatrick\": false,"
-      + "\"aliases\": [\"confused\"],"
-      + "\"tags\": []"
-      + "}");
+        + "\"emoji\": \"\uD83D\uDE15\","
+        + "\"description\": \"confused face\","
+        + "\"supports_fitzpatrick\": false,"
+        + "\"aliases\": [\"confused\"],"
+        + "\"tags\": []"
+        + "}");
 
     // WHEN
     Emoji emoji = EmojiLoader.buildEmojiFromJSON(json);
@@ -158,14 +157,14 @@ public class EmojiLoaderTest {
 
   @Test
   public void buildEmojiFromJSON_without_support_for_fitzpatrick()
-    throws UnsupportedEncodingException {
+      throws UnsupportedEncodingException {
     // GIVEN
     JSONObject json = new JSONObject("{"
-      + "\"emoji\": \"\uD83D\uDE15\","
-      + "\"description\": \"confused face\","
-      + "\"aliases\": [\"confused\"],"
-      + "\"tags\": []"
-      + "}");
+        + "\"emoji\": \"\uD83D\uDE15\","
+        + "\"description\": \"confused face\","
+        + "\"aliases\": [\"confused\"],"
+        + "\"tags\": []"
+        + "}");
 
     // WHEN
     Emoji emoji = EmojiLoader.buildEmojiFromJSON(json);

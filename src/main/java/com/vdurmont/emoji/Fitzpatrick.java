@@ -38,7 +38,6 @@ public enum Fitzpatrick {
     this.unicode = unicode;
   }
 
-
   public static Fitzpatrick fitzpatrickFromUnicode(String unicode) {
     for (Fitzpatrick v : values()) {
       if (v.unicode.equals(unicode)) {
