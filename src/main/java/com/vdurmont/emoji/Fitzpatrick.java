@@ -5,37 +5,49 @@ package com.vdurmont.emoji;
  */
 public enum Fitzpatrick {
   /**
-   * Fitzpatrick modifier of type 1/2 (pale white/white)
+   * Fitzpatrick modifier of type 1 (pale white)
    */
-  TYPE_1_2("\uD83C\uDFFB"),
+  TYPE_1("\uD83C\uDFFB", "127995", "x1f3fb"),
 
   /**
-   * Fitzpatrick modifier of type 3 (cream white)
+   * Fitzpatrick modifier of type 2 (cream white)
    */
-  TYPE_3("\uD83C\uDFFC"),
+  TYPE_2("\uD83C\uDFFC", "127996", "x1f3fc"),
 
   /**
-   * Fitzpatrick modifier of type 4 (moderate brown)
+   * Fitzpatrick modifier of type 3 (moderate brown)
    */
-  TYPE_4("\uD83C\uDFFD"),
+  TYPE_3("\uD83C\uDFFD", "127997", "x1f3fd"),
 
   /**
-   * Fitzpatrick modifier of type 5 (dark brown)
+   * Fitzpatrick modifier of type 4 (dark brown)
    */
-  TYPE_5("\uD83C\uDFFE"),
+  TYPE_4("\uD83C\uDFFE", "127998", "x1f3fe"),
 
   /**
-   * Fitzpatrick modifier of type 6 (black)
+   * Fitzpatrick modifier of type 5 (black)
    */
-  TYPE_6("\uD83C\uDFFF");
+  TYPE_5("\uD83C\uDFFF", "127999", "x1f3ff");
 
   /**
    * The unicode representation of the Fitzpatrick modifier
    */
   public final String unicode;
 
-  Fitzpatrick(String unicode) {
+  /**
+  * The decimal representation of the Fitzpatrick modifier
+  */
+  public final String decimal;
+
+  /**
+  * The hex representation of the Fitzpatrick modifier
+  */
+  public final String hex;
+
+  Fitzpatrick(String unicode, String decimal, String hex) {
     this.unicode = unicode;
+    this.decimal = decimal;
+    this.hex = hex;
   }
 
   public static Fitzpatrick fitzpatrickFromUnicode(String unicode) {

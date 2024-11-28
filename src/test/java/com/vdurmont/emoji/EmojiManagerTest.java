@@ -34,8 +34,8 @@ public class EmojiManagerTest {
     Set<Emoji> emojis = EmojiManager.getForTag("happy");
 
     // THEN
-    assertEquals(4, emojis.size());
-    assertTrue(TestTools.containsEmojis(emojis, "smile", "smiley", "grinning", "satisfied"));
+    assertEquals(44, emojis.size());
+    assertTrue(TestTools.containsEmojis(emojis, ":smile:", ":smiley:", ":grinning:", ":satisfied:"));
   }
 
   // @Test
@@ -212,7 +212,7 @@ public class EmojiManagerTest {
 
     // THEN
     // We know the number of distinct tags int the...!
-    assertEquals(461, tags.size());
+    assertEquals(3700, tags.size());
   }
 
   @Test

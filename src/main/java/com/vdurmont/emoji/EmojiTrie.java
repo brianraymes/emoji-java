@@ -10,18 +10,22 @@ public class EmojiTrie {
 
   public EmojiTrie(Collection<Emoji> emojis) {
     int maxDepth = 0;
+
     for (Emoji emoji : emojis) {
       Node tree = root;
       char[] chars = emoji.getUnicode().toCharArray();
       maxDepth = Math.max(maxDepth, chars.length);
+
       for (char c : chars) {
-        if (!tree.hasChild(c)) {
+        if (!tree.hasChild(c))
           tree.addChild(c);
-        }
+
         tree = tree.getChild(c);
       }
+
       tree.setEmoji(emoji);
     }
+
     this.maxDepth = maxDepth;
   }
 
@@ -63,9 +67,9 @@ public class EmojiTrie {
 
     Node tree = root;
     for (int i = start; i < end; i++) {
-      if (!tree.hasChild(sequence[i])) {
+      if (!tree.hasChild(sequence[i]))
         return Matches.IMPOSSIBLE;
-      }
+
       tree = tree.getChild(sequence[i]);
     }
 
@@ -83,17 +87,17 @@ public class EmojiTrie {
   }
 
   Emoji getEmoji(char[] sequence, int start, int end) {
-    if (start < 0 || start > end || end > sequence.length) {
+    if (start < 0 || start > end || end > sequence.length)
       throw new ArrayIndexOutOfBoundsException("start " + start + ", end " + end + ", length " + sequence.length);
-    }
 
     Node tree = root;
     for (int i = 0; i < end; i++) {
-      if (!tree.hasChild(sequence[i])) {
+      if (!tree.hasChild(sequence[i]))
         return null;
-      }
+
       tree = tree.getChild(sequence[i]);
     }
+
     return tree.getEmoji();
   }
 

@@ -15,7 +15,7 @@ public class Emoji {
   private final String description;
   private final boolean supportsFitzpatrick;
   private final List<String> aliases;
-  private final List<String> tags;
+  private final List<String> keywords;
   private final String unicode;
   private final String htmlDec;
   private final String htmlHex;
@@ -29,12 +29,11 @@ public class Emoji {
    * @param keywords            the tags associated with this emoji
    * @param bytes               the bytes that represent the emoji
    */
-  protected Emoji(String description, boolean supportsFitzpatrick, List<String> aliases, List<String> keywords,
-      byte... bytes) {
+  protected Emoji(String description, boolean supportsFitzpatrick, List<String> aliases, List<String> keywords, byte... bytes) {
     this.description = description;
     this.supportsFitzpatrick = supportsFitzpatrick;
     this.aliases = Collections.unmodifiableList(aliases);
-    this.tags = Collections.unmodifiableList(keywords);
+    this.keywords = Collections.unmodifiableList(keywords);
 
     int count = 0;
     try {
@@ -53,7 +52,8 @@ public class Emoji {
       }
       this.htmlDec = stringJoin(pointCodes, count);
       this.htmlHex = stringJoin(pointCodesHex, count);
-    } catch (UnsupportedEncodingException e) {
+    }
+    catch (UnsupportedEncodingException e) {
       throw new RuntimeException(e);
     }
   }
@@ -106,7 +106,7 @@ public class Emoji {
    * @return the tags (unmodifiable)
    */
   public List<String> getKeywords() {
-    return this.tags;
+    return this.keywords;
   }
 
   /**
@@ -132,9 +132,9 @@ public class Emoji {
    */
   public String getUnicode(Fitzpatrick fitzpatrick) {
     if (!this.supportsFitzpatrick()) {
-      throw new UnsupportedOperationException(
-          "Cannot get the unicode with a fitzpatrick modifier, " + "the emoji doesn't support fitzpatrick.");
-    } else if (fitzpatrick == null) {
+      throw new UnsupportedOperationException("Cannot get the unicode with a fitzpatrick modifier, " + "the emoji doesn't support fitzpatrick.");
+    }
+    else if (fitzpatrick == null) {
       return this.getUnicode();
     }
     return this.getUnicode() + fitzpatrick.unicode;
@@ -196,8 +196,19 @@ public class Emoji {
    */
   @Override
   public String toString() {
-    return "Emoji{" + "description='" + description + '\'' + ", supportsFitzpatrick=" + supportsFitzpatrick
-        + ", aliases=" + aliases + ", tags=" + tags + ", unicode='" + unicode + '\'' + ", htmlDec='" + htmlDec + '\''
-        + ", htmlHex='" + htmlHex + '\'' + '}';
+    //@formatter:off
+    return "Emoji{" +
+      "description='" + description + '\'' +
+      ", supportsFitzpatrick=" + supportsFitzpatrick +
+      ", aliases=" + aliases +
+      ", keywords=" + keywords +
+      ", unicode='" + unicode + '\'' +
+      ", htmlDec='" + htmlDec + '\'' +
+      ", htmlHex='" + htmlHex + '\'' +
+      '}';
+    //@formatter:on
+    // return "Emoji{" + 
+    //   "description='" + description + '\'' + 
+    //   ", supportsFitzpatrick=" + supportsFitzpatrick + ", aliases=" + aliases + ", keywords=" + keywords + ", unicode='" + unicode + '\'' + ", htmlDec='" + htmlDec + '\'' + ", htmlHex='" + htmlHex + '\'' + '}';
   }
 }

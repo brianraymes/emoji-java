@@ -36,12 +36,14 @@ public class EmojiLoader {
   public static List<Emoji> loadEmojis(InputStream stream) throws IOException {
     JSONArray emojisJSON = new JSONArray(inputStreamToString(stream));
     List<Emoji> emojis = new ArrayList<Emoji>(emojisJSON.length());
+
     for (int i = 0; i < emojisJSON.length(); i++) {
       Emoji emoji = buildEmojiFromJSON(emojisJSON.getJSONObject(i));
-      if (emoji != null) {
+
+      if (emoji != null)
         emojis.add(emoji);
-      }
     }
+
     return emojis;
   }
 
@@ -50,10 +52,12 @@ public class EmojiLoader {
     InputStreamReader isr = new InputStreamReader(stream, "UTF-8");
     BufferedReader br = new BufferedReader(isr);
     String read;
-    while ((read = br.readLine()) != null) {
+
+    while ((read = br.readLine()) != null)
       sb.append(read);
-    }
+
     br.close();
+
     return sb.toString();
   }
 
@@ -62,17 +66,20 @@ public class EmojiLoader {
       return null;
     }
 
-    byte[] bytes = json.getString("emoji").getBytes("UTF-8");
+    byte[] bytes = json.getString("unicode").getBytes("UTF-8");
     String description = null;
-    if (json.has("description")) {
+
+    if (json.has("description"))
       description = json.getString("description");
-    }
+
     boolean supportsFitzpatrick = false;
-    if (json.has("supports_fitzpatrick")) {
-      supportsFitzpatrick = json.getBoolean("supports_fitzpatrick");
-    }
+
+    if (json.has("hasFitzpatrick"))
+      supportsFitzpatrick = json.getBoolean("hasFitzpatrick");
+
     List<String> aliases = jsonArrayToStringList(json.getJSONArray("aliases"));
-    List<String> tags = jsonArrayToStringList(json.getJSONArray("tags"));
+    List<String> tags = jsonArrayToStringList(json.getJSONArray("keywords"));
+
     return new Emoji(description, supportsFitzpatrick, aliases, tags, bytes);
   }
 

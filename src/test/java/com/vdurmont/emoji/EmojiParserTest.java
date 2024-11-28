@@ -48,7 +48,7 @@ public class EmojiParserTest {
     String result = EmojiParser.parseToAliases(str);
 
     // THEN
-    assertEquals(":boy|type_6:", result);
+    assertEquals(":boy_tone5:", result);
   }
 
   @Test
@@ -60,7 +60,7 @@ public class EmojiParserTest {
     String result = EmojiParser.parseToAliases(str, FitzpatrickAction.REMOVE);
 
     // THEN
-    assertEquals(":boy:", result);
+    assertEquals(":boy_tone5:", result);
   }
 
   @Test
@@ -84,7 +84,7 @@ public class EmojiParserTest {
     String result = EmojiParser.parseToAliases(str, FitzpatrickAction.IGNORE);
 
     // THEN
-    assertEquals(":boy:\uD83C\uDFFF", result);
+    assertEquals(":boy_tone5:", result);
   }
 
   @Test
@@ -356,7 +356,7 @@ public class EmojiParserTest {
 
     // THEN
     assertTrue(candidate.emoji.getAliases().contains("boy"));
-    assertEquals(Fitzpatrick.TYPE_3, candidate.fitzpatrick);
+    assertEquals(Fitzpatrick.TYPE_2, candidate.fitzpatrick);
   }
 
   @Test
@@ -424,7 +424,7 @@ public class EmojiParserTest {
     String result = EmojiParser.parseToAliases(str);
 
     // THEN
-    assertEquals("Nigeria is :nigeria:, NG is :ng:", result);
+    assertEquals("Nigeria is :flag_ng:, NG is :ng:", result);
   }
 
   @Test
@@ -436,7 +436,7 @@ public class EmojiParserTest {
     String result = EmojiParser.parseToAliases(str);
 
     // THEN
-    assertEquals(":couplekiss_woman_woman:", result);
+    assertEquals(":kiss_ww:", result);
   }
 
   @Test
@@ -458,10 +458,10 @@ public class EmojiParserTest {
   public void extractEmojis_withFitzpatrickModifiers() {
     // GIVEN
     final String surfer = EmojiManager.getForAlias("surfer").getUnicode();
-    final String surfer3 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_3);
-    final String surfer4 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_4);
-    final String surfer5 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_5);
-    final String surfer6 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_6);
+    final String surfer3 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_2);
+    final String surfer4 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_3);
+    final String surfer5 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_4);
+    final String surfer6 = EmojiManager.getForAlias("surfer").getUnicode(Fitzpatrick.TYPE_5);
     final String surfers = surfer + " " + surfer3 + " " + surfer4 + " " + surfer5 + " " + surfer6;
 
     // WHEN
@@ -486,6 +486,33 @@ public class EmojiParserTest {
     String result = EmojiParser.parseToAliases(str);
 
     // THEN
-    assertEquals(":1st_place_medal:", result);
+    assertEquals(":first_place:", result);
+  }
+
+  @Test
+  public void testorama() {
+    String str = "! 😄 Hello world 😄 !";
+
+    String result = EmojiParser.parseToHtmlDecimal(str);
+
+    assertEquals("! &#128516; Hello world &#128516; !", result);
+  }
+
+  @Test
+  public void testorama2() {
+    String str = "! 😄 Hello world 😄 !";
+
+    String result = EmojiParser.parseToHtmlHexadecimal(str);
+
+    assertEquals("! &#x1f604; Hello world &#x1f604; !", result);
+  }
+
+  @Test
+  public void testorama3() {
+    String str = "! 😄 Hello world 😄 !";
+
+    String result = EmojiParser.parseToUnicode(str);
+
+    assertEquals("! \uD83D\uDE04 Hello world \uD83D\uDE04 !", result);
   }
 }
