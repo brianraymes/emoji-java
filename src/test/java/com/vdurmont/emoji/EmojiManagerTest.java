@@ -35,12 +35,7 @@ public class EmojiManagerTest {
 
     // THEN
     assertEquals(4, emojis.size());
-    assertTrue(TestTools.containsEmojis(
-        emojis,
-        "smile",
-        "smiley",
-        "grinning",
-        "satisfied"));
+    assertTrue(TestTools.containsEmojis(emojis, "smile", "smiley", "grinning", "satisfied"));
   }
 
   // @Test
@@ -74,9 +69,7 @@ public class EmojiManagerTest {
     Emoji emoji = EmojiManager.getForAlias("smile");
 
     // THEN
-    assertEquals(
-        "grinning face with smiling eyes",
-        emoji.getDescription());
+    assertEquals("grinning face with smiling eyes", emoji.getDescription());
   }
 
   @Test
@@ -87,9 +80,7 @@ public class EmojiManagerTest {
     Emoji emoji = EmojiManager.getForAlias(":smile:");
 
     // THEN
-    assertEquals(
-        "grinning face with smiling eyes",
-        emoji.getDescription());
+    assertEquals("grinning face with smiling eyes", emoji.getDescription());
   }
 
   @Test
@@ -234,9 +225,7 @@ public class EmojiManagerTest {
     // THEN
     Set<String> unicodes = new HashSet<String>();
     for (Emoji emoji : emojis) {
-      assertFalse(
-          "Duplicate: " + emoji.getDescription(),
-          unicodes.contains(emoji.getUnicode()));
+      assertFalse("Duplicate: " + emoji.getDescription(), unicodes.contains(emoji.getUnicode()));
       unicodes.add(emoji.getUnicode());
     }
     assertEquals(unicodes.size(), emojis.size());

@@ -45,8 +45,7 @@ public class EmojiLoader {
     return emojis;
   }
 
-  private static String inputStreamToString(
-      InputStream stream) throws IOException {
+  private static String inputStreamToString(InputStream stream) throws IOException {
     StringBuilder sb = new StringBuilder();
     InputStreamReader isr = new InputStreamReader(stream, "UTF-8");
     BufferedReader br = new BufferedReader(isr);
@@ -58,8 +57,7 @@ public class EmojiLoader {
     return sb.toString();
   }
 
-  protected static Emoji buildEmojiFromJSON(
-      JSONObject json) throws UnsupportedEncodingException {
+  protected static Emoji buildEmojiFromJSON(JSONObject json) throws UnsupportedEncodingException {
     if (!json.has("emoji")) {
       return null;
     }

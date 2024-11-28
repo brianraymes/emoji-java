@@ -26,19 +26,15 @@ public class Emoji {
    * @param description         The description of the emoji
    * @param supportsFitzpatrick Whether the emoji supports Fitzpatrick modifiers
    * @param aliases             the aliases for this emoji
-   * @param tags                the tags associated with this emoji
+   * @param keywords            the tags associated with this emoji
    * @param bytes               the bytes that represent the emoji
    */
-  protected Emoji(
-      String description,
-      boolean supportsFitzpatrick,
-      List<String> aliases,
-      List<String> tags,
+  protected Emoji(String description, boolean supportsFitzpatrick, List<String> aliases, List<String> keywords,
       byte... bytes) {
     this.description = description;
     this.supportsFitzpatrick = supportsFitzpatrick;
     this.aliases = Collections.unmodifiableList(aliases);
-    this.tags = Collections.unmodifiableList(tags);
+    this.tags = Collections.unmodifiableList(keywords);
 
     int count = 0;
     try {
@@ -70,8 +66,10 @@ public class Emoji {
    */
   private String stringJoin(String[] array, int count) {
     String joined = "";
+
     for (int i = 0; i < count; i++)
       joined += array[i];
+
     return joined;
   }
 
@@ -107,7 +105,7 @@ public class Emoji {
    *
    * @return the tags (unmodifiable)
    */
-  public List<String> getTags() {
+  public List<String> getKeywords() {
     return this.tags;
   }
 
@@ -135,8 +133,7 @@ public class Emoji {
   public String getUnicode(Fitzpatrick fitzpatrick) {
     if (!this.supportsFitzpatrick()) {
       throw new UnsupportedOperationException(
-          "Cannot get the unicode with a fitzpatrick modifier, " +
-              "the emoji doesn't support fitzpatrick.");
+          "Cannot get the unicode with a fitzpatrick modifier, " + "the emoji doesn't support fitzpatrick.");
     } else if (fitzpatrick == null) {
       return this.getUnicode();
     }
@@ -173,8 +170,7 @@ public class Emoji {
 
   @Override
   public boolean equals(Object other) {
-    return !(other == null || !(other instanceof Emoji)) &&
-        ((Emoji) other).getUnicode().equals(getUnicode());
+    return !(other == null || !(other instanceof Emoji)) && ((Emoji) other).getUnicode().equals(getUnicode());
   }
 
   @Override
@@ -200,14 +196,8 @@ public class Emoji {
    */
   @Override
   public String toString() {
-    return "Emoji{" +
-        "description='" + description + '\'' +
-        ", supportsFitzpatrick=" + supportsFitzpatrick +
-        ", aliases=" + aliases +
-        ", tags=" + tags +
-        ", unicode='" + unicode + '\'' +
-        ", htmlDec='" + htmlDec + '\'' +
-        ", htmlHex='" + htmlHex + '\'' +
-        '}';
+    return "Emoji{" + "description='" + description + '\'' + ", supportsFitzpatrick=" + supportsFitzpatrick
+        + ", aliases=" + aliases + ", tags=" + tags + ", unicode='" + unicode + '\'' + ", htmlDec='" + htmlDec + '\''
+        + ", htmlHex='" + htmlHex + '\'' + '}';
   }
 }

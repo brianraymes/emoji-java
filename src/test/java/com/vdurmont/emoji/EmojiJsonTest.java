@@ -37,13 +37,7 @@ public class EmojiJsonTest {
         return EmojiTestDataReader.getEmojiList(is);
     }
 
-    private static final int[] FITZPATRIC_CODEPOINTS = new int[] {
-            EmojiTestDataReader.convertFromCodepoint("1F3FB"),
-            EmojiTestDataReader.convertFromCodepoint("1F3FC"),
-            EmojiTestDataReader.convertFromCodepoint("1F3FD"),
-            EmojiTestDataReader.convertFromCodepoint("1F3FE"),
-            EmojiTestDataReader.convertFromCodepoint("1F3FF")
-    };
+    private static final int[] FITZPATRIC_CODEPOINTS = new int[] { EmojiTestDataReader.convertFromCodepoint("1F3FB"), EmojiTestDataReader.convertFromCodepoint("1F3FC"), EmojiTestDataReader.convertFromCodepoint("1F3FD"), EmojiTestDataReader.convertFromCodepoint("1F3FE"), EmojiTestDataReader.convertFromCodepoint("1F3FF") };
 
     @Parameterized.Parameter
     public String emoji;
@@ -71,8 +65,7 @@ public class EmojiJsonTest {
             EmojiParser.parseFromUnicode(emoji, new EmojiParser.EmojiTransformer() {
                 public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
                     if (unicodeCandidate.hasFitzpatrick()) {
-                        assertTrue("Asserting emoji contains fitzpatric: " + emoji + " " + unicodeCandidate.getEmoji(),
-                                unicodeCandidate.getEmoji().supportsFitzpatrick());
+                        assertTrue("Asserting emoji contains fitzpatric: " + emoji + " " + unicodeCandidate.getEmoji(), unicodeCandidate.getEmoji().supportsFitzpatrick());
                     }
                     return "";
                 }
@@ -88,8 +81,7 @@ public class EmojiJsonTest {
             String line = reader.readLine();
             String[] lineSplit;
             while (line != null) {
-                if (!line.startsWith("#") && !line.startsWith(" ") && !line.startsWith("\n") &&
-                        line.length() != 0) {
+                if (!line.startsWith("#") && !line.startsWith(" ") && !line.startsWith("\n") && line.length() != 0) {
                     lineSplit = line.split(";");
                     result.add(convertToEmoji(lineSplit[0].trim()));
                 }
@@ -116,13 +108,10 @@ public class EmojiJsonTest {
 
     @Test
     public void checkInverseParse() {
-        assertEquals(emoji, EmojiParser
-                .parseToUnicode(EmojiParser.parseToHtmlDecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
+        assertEquals(emoji, EmojiParser.parseToUnicode(EmojiParser.parseToHtmlDecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
 
-        assertEquals(emoji, EmojiParser
-                .parseToUnicode(EmojiParser.parseToHtmlHexadecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
+        assertEquals(emoji, EmojiParser.parseToUnicode(EmojiParser.parseToHtmlHexadecimal(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
 
-        assertEquals(emoji,
-                EmojiParser.parseToUnicode(EmojiParser.parseToAliases(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
+        assertEquals(emoji, EmojiParser.parseToUnicode(EmojiParser.parseToAliases(emoji, EmojiParser.FitzpatrickAction.IGNORE)));
     }
 }

@@ -50,7 +50,8 @@ public enum Fitzpatrick {
   public static Fitzpatrick fitzpatrickFromType(String type) {
     try {
       return Fitzpatrick.valueOf(type.toUpperCase());
-    } catch (IllegalArgumentException e) {
+    }
+    catch (IllegalArgumentException e) {
       return null;
     }
   }

@@ -55,13 +55,11 @@ public class EmojiTrie {
    */
   public Matches isEmoji(char[] sequence, int start, int end) {
     if (start < 0 || start > end || end > sequence.length) {
-      throw new ArrayIndexOutOfBoundsException(
-          "start " + start + ", end " + end + ", length " + sequence.length);
+      throw new ArrayIndexOutOfBoundsException("start " + start + ", end " + end + ", length " + sequence.length);
     }
 
-    if (sequence == null) {
-      return Matches.POSSIBLY;
-    }
+    // if (sequence == null)
+    //   return Matches.POSSIBLY;
 
     Node tree = root;
     for (int i = start; i < end; i++) {
@@ -86,8 +84,7 @@ public class EmojiTrie {
 
   Emoji getEmoji(char[] sequence, int start, int end) {
     if (start < 0 || start > end || end > sequence.length) {
-      throw new ArrayIndexOutOfBoundsException(
-          "start " + start + ", end " + end + ", length " + sequence.length);
+      throw new ArrayIndexOutOfBoundsException("start " + start + ", end " + end + ", length " + sequence.length);
     }
 
     Node tree = root;

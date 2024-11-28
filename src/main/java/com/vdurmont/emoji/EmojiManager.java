@@ -19,7 +19,7 @@ import java.util.Set;
 public class EmojiManager {
   private static final String PATH = "/emojis.json";
   private static final Map<String, Emoji> EMOJIS_BY_ALIAS = new HashMap<String, Emoji>();
-  private static final Map<String, Set<Emoji>> EMOJIS_BY_TAG = new HashMap<String, Set<Emoji>>();
+  private static final Map<String, Set<Emoji>> EMOJIS_BY_KEYWORD = new HashMap<String, Set<Emoji>>();
   private static final List<Emoji> ALL_EMOJIS;
   static final EmojiTrie EMOJI_TRIE;
 
@@ -28,12 +28,13 @@ public class EmojiManager {
       InputStream stream = EmojiLoader.class.getResourceAsStream(PATH);
       List<Emoji> emojis = EmojiLoader.loadEmojis(stream);
       ALL_EMOJIS = emojis;
+
       for (Emoji emoji : emojis) {
-        for (String tag : emoji.getTags()) {
-          if (EMOJIS_BY_TAG.get(tag) == null) {
-            EMOJIS_BY_TAG.put(tag, new HashSet<Emoji>());
+        for (String keyword : emoji.getKeywords()) {
+          if (EMOJIS_BY_KEYWORD.get(keyword) == null) {
+            EMOJIS_BY_KEYWORD.put(keyword, new HashSet<Emoji>());
           }
-          EMOJIS_BY_TAG.get(tag).add(emoji);
+          EMOJIS_BY_KEYWORD.get(keyword).add(emoji);
         }
         for (String alias : emoji.getAliases()) {
           EMOJIS_BY_ALIAS.put(alias, emoji);
@@ -47,7 +48,8 @@ public class EmojiManager {
         }
       });
       stream.close();
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
@@ -67,10 +69,10 @@ public class EmojiManager {
    *         is unknown
    */
   public static Set<Emoji> getForTag(String tag) {
-    if (tag == null) {
+    if (tag == null)
       return null;
-    }
-    return EMOJIS_BY_TAG.get(tag);
+
+    return EMOJIS_BY_KEYWORD.get(tag);
   }
 
   /**
@@ -82,17 +84,16 @@ public class EmojiManager {
    *         is unknown
    */
   public static Emoji getForAlias(String alias) {
-    if (alias == null || alias.isEmpty()) {
+    if (alias == null || alias.isEmpty())
       return null;
-    }
+
     return EMOJIS_BY_ALIAS.get(trimAlias(alias));
   }
 
   private static String trimAlias(String alias) {
     int len = alias.length();
-    return alias.substring(
-        alias.charAt(0) == ':' ? 1 : 0,
-        alias.charAt(len - 1) == ':' ? len - 1 : len);
+
+    return alias.substring(alias.charAt(0) == ':' ? 1 : 0, alias.charAt(len - 1) == ':' ? len - 1 : len);
   }
 
   /**
@@ -104,9 +105,9 @@ public class EmojiManager {
    *         unicode is unknown
    */
   public static Emoji getByUnicode(String unicode) {
-    if (unicode == null) {
+    if (unicode == null)
       return null;
-    }
+
     return EMOJI_TRIE.getEmoji(unicode);
   }
 
@@ -131,9 +132,8 @@ public class EmojiManager {
       return false;
 
     EmojiParser.UnicodeCandidate unicodeCandidate = EmojiParser.getNextUnicodeCandidate(string.toCharArray(), 0);
-    return unicodeCandidate != null &&
-        unicodeCandidate.getEmojiStartIndex() == 0 &&
-        unicodeCandidate.getFitzpatrickEndIndex() == string.length();
+
+    return unicodeCandidate != null && unicodeCandidate.getEmojiStartIndex() == 0 && unicodeCandidate.getFitzpatrickEndIndex() == string.length();
   }
 
   /**
@@ -189,6 +189,6 @@ public class EmojiManager {
    * @return the tags
    */
   public static Collection<String> getAllTags() {
-    return EMOJIS_BY_TAG.keySet();
+    return EMOJIS_BY_KEYWORD.keySet();
   }
 }

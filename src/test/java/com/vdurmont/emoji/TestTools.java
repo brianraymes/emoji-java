@@ -1,9 +1,7 @@
 package com.vdurmont.emoji;
 
 public class TestTools {
-  public static boolean containsEmojis(
-      Iterable<Emoji> emojis,
-      String... aliases) {
+  public static boolean containsEmojis(Iterable<Emoji> emojis, String... aliases) {
     for (String alias : aliases) {
       boolean contains = containsEmoji(emojis, alias);
       if (!contains) {
